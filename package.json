@@ -1,0 +1,39 @@
+{
+  "name": "nonlinear.zone",
+  "version": "0.0.1",
+  "license": "All Rights Reserved",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mwishek/nonlinear-metalsmith.git"
+  },
+  "description": "A node.js app to build my blog using metalsmith",
+  "bin": {
+    "main": "build.js"
+  },
+  "scripts": {},
+  "dependencies": {
+    "metalsmith": "^1.0.1",
+    "metalsmith-assets": "^0.1.0",
+    "metalsmith-build-date": "^0.1.0",
+    "metalsmith-collections": "^0.6.0",
+    "metalsmith-excerpts": "^1.0.0",
+    "metalsmith-feed": "^0.0.6",
+    "metalsmith-ignore": "^0.1.2",
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-metadata": "^0.0.1",
+    "metalsmith-multimarkdown": "0.0.2",
+    "metalsmith-permalinks": "^0.4.0",
+    "metalsmith-redirect": "^1.0.2",
+    "metalsmith-sass": "^0.5.0",
+    "metalsmith-snippet": "^1.0.1",
+    "metalsmith-templates": "^0.6.0",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "assert-dir-equal": "~1.0.1",
+    "co-mocha": "^1.0.1",
+    "metalsmith-drafts": "0.0.1",
+    "metalsmith-markdown": "0.2.1",
+    "mocha": "^1.21.4"
+  }
+}
