@@ -36,9 +36,9 @@ var metalsmith = Metalsmith(__dirname)
     destination: './js' // relative to the build directory
   }))
   .use(sass({
-	outputStyle: "expanded",
+    outputStyle: "expanded",
     outputDir: "css/",
-	includePaths: ["src/_sass/"]
+    includePaths: ["src/_sass/"]
   }))
   .use(ignore([
 	  '_includes/*',
@@ -56,6 +56,7 @@ var metalsmith = Metalsmith(__dirname)
 	  relative: false
   }))
   .use(collections({
+      all : {},
       posts: {
          sortBy: 'date',
          reverse: true
