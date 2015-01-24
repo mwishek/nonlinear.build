@@ -1,6 +1,0 @@
-<html>
-<body>
-{{{prismic.macaron.results.[0].data.name.html}}}
-{{{prismic.macaron.results.[0].data.description.html}}}
-</body>
-</html>
