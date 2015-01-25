@@ -1,4 +1,4 @@
-var s3read = require('metalsmith-s3read');
+var s3 = require('metalsmith-s3');
 var metadata = require('metalsmith-metadata');
 var date = require('metalsmith-build-date');
 var assets = require('metalsmith-assets');
@@ -20,23 +20,20 @@ var Metalsmith = require('metalsmith');
  */
 
 var metalsmith = Metalsmith(__dirname)
-  .use(s3read({ bucket: 'src.nonlinear.zone' }))
+  .use(s3({ action: 'copy',
+    bucket: 'nonlinear.zone.draftt',
+    from: 'nonlinear.zone.srcc',
+    prefix: ['assets', 'images', 'js']
+  })) 
+  .use(s3({ 
+    action: 'read', 
+    bucket: 'nonlinear.zone.srcc',
+    ignore: ['images/', 'assets/', 'js/']
+  }))
   .use(metadata({
     site: '_config.yaml'
   }))
   .use(date())
-  //.use(assets({
-  //  source: 'src/assets', // relative to the working directory
-  //  destination: './assets' // relative to the build directory
-  //}))
-  //.use(assets({
-  //  source: 'src/images', // relative to the working directory
-  //  destination: './images' // relative to the build directory
-  //}))
-  //.use(assets({
-  //  source: 'src/js', // relative to the working directory
-  //  destination: './js' // relative to the build directory
-  //}))
   .use(sass({
     outputStyle: "expanded",
     outputDir: "css/",
@@ -47,9 +44,6 @@ var metalsmith = Metalsmith(__dirname)
 	  '_layouts/*',
 	  '_plugins/*',
 	  '_unpublished/*',
-	  'images/*',
-	  'assets/*',
-	  'js/*'
   ]))
   .use(mmd())
   .use(permalinks({
