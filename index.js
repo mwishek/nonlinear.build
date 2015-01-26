@@ -21,13 +21,13 @@ var Metalsmith = require('metalsmith');
 
 var metalsmith = Metalsmith(__dirname)
   .use(s3({ action: 'copy',
-    bucket: 'nonlinear.zone.draftt',
-    from: 'nonlinear.zone.srcc',
+    bucket: 'nonlinear.zone',
+    from: 'nonlinear.zone.src',
     prefix: ['assets', 'images', 'js']
   })) 
   .use(s3({ 
     action: 'read', 
-    bucket: 'nonlinear.zone.srcc',
+    bucket: 'nonlinear.zone.src',
     ignore: ['images/', 'assets/', 'js/']
   }))
   .use(metadata({
@@ -41,9 +41,7 @@ var metalsmith = Metalsmith(__dirname)
   }))
   .use(ignore([
 	  '_includes/*',
-	  '_layouts/*',
-	  '_plugins/*',
-	  '_unpublished/*',
+	  '_layouts/*'
   ]))
   .use(mmd())
   .use(permalinks({
@@ -62,7 +60,7 @@ var metalsmith = Metalsmith(__dirname)
       }
   }))
   .use(redirect({
-	  '/2014/12/18/nonlinear-beginnings.html': '/2014/12/18/nonlinear-beginnings',
+      '/2014/12/18/nonlinear-beginnings.html': '/2014/12/18/nonlinear-beginnings',
       '/2015/01/06/2015-a-new-year.html': '/2015/01/06/2015-a-new-year',
       '/2015/01/06/why-i-want-to-write.html': '/2015/01/06/why-i-want-to-write',
       '/2015/01/07/writing-environment.html': '/2015/01/07/writing-environment',
@@ -73,8 +71,8 @@ var metalsmith = Metalsmith(__dirname)
       '/2015/01/13/just-write.html': '/2015/01/13/just-write.html',
       '/2015/01/14/reflections-on-the-10-day-blogging-workshop.html': '/2015/01/14/reflections-on-the-10-day-blogging-workshop',
       '/2015/01/18/reforming-packrat.html': '/2015/01/18/reforming-packrat',
-	  '/about.html': '/about',
-	  '/colophon.html': '/colophon'
+      '/about.html': '/about',
+      '/colophon.html': '/colophon'
   }))
   .use(feed({collection: 'posts', destination: 'feed.xml'}))
   .use(excerpts())
@@ -83,8 +81,12 @@ var metalsmith = Metalsmith(__dirname)
     suffix: '...'
   }))
   .use(templates({
-	  engine: 'swig',
-      directory: 'src/_layouts',
+    engine: 'swig',
+    directory: 'src/_layouts',
+  }))
+  .use(s3({
+    action: 'write',
+    bucket: 'nonlinear.zone'
   }))
   .build(function(err){
     if (err) throw err;
