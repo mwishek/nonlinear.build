@@ -68,7 +68,7 @@ var metalsmith = Metalsmith(__dirname)
       '/2015/01/10/updated-about.html': '/2015/01/10/updated-about',
       '/2015/01/11/s3-analytics-s3stat-com.html': '/2015/01/11/s3-analytics-s3stat-com',
       '/2015/01/12/goals-for-blogging-in-2015.html': '/2015/01/12/goals-for-blogging-in-2015',
-      '/2015/01/13/just-write.html': '/2015/01/13/just-write.html',
+      '/2015/01/13/just-write.html': '/2015/01/13/just-write',
       '/2015/01/14/reflections-on-the-10-day-blogging-workshop.html': '/2015/01/14/reflections-on-the-10-day-blogging-workshop',
       '/2015/01/18/reforming-packrat.html': '/2015/01/18/reforming-packrat',
       '/about.html': '/about',
