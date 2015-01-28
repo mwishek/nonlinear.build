@@ -14,14 +14,20 @@ var snippet = require('metalsmith-snippet');
 var excerpts = require('metalsmith-excerpts');
 var templates = require('metalsmith-templates');
 var Metalsmith = require('metalsmith');
+var util = require('util');
 
 /**
  * Build.
  */
 
-var metalsmith = Metalsmith(__dirname)
+
+exports.Builder = function(event, context) {
+ console.log("starting nonlinear.zone build...");
+ var files = [];
+ console.log("step 1...");
+ var metalsmith = Metalsmith(__dirname)
   .use(s3({ action: 'copy',
-    bucket: 'nonlinear.zone',
+    bucket: 'nonlinear.zone.draft',
     from: 'nonlinear.zone.src',
     prefix: ['assets', 'images', 'js']
   })) 
@@ -43,7 +49,7 @@ var metalsmith = Metalsmith(__dirname)
 	  '_includes/*',
 	  '_layouts/*'
   ]))
-  .use(mmd())
+  .use(markdown())
   .use(permalinks({
 	  pattern: ':date/:title',
 	  date: 'YYYY/MM/DD',
@@ -86,8 +92,10 @@ var metalsmith = Metalsmith(__dirname)
   }))
   .use(s3({
     action: 'write',
-    bucket: 'nonlinear.zone'
+    bucket: 'nonlinear.zone.draft'
   }))
-  .build(function(err){
+  .run(files, function(err, files) {
     if (err) throw err;
+    context.done(null, "nonlinear.zone build done!");
   });
+};
